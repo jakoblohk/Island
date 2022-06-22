@@ -38,6 +38,7 @@ public class Player_script : MonoBehaviour
 
     }
 
+    // additional methods
     // Coin counter
     public void Coins()
     {
@@ -50,11 +51,10 @@ public class Player_script : MonoBehaviour
 
         if (horizontal > 0)
         {
-            //transform.Translate(Vector3.right * _moveSpeed * Time.deltaTime);
             transform.Rotate(0, horizontal * _turnSpeed, 0);
-        } else if (horizontal < 0)
+        }
+        else if (horizontal < 0)
         {
-            //transform.Translate(Vector3.left * _moveSpeed * Time.deltaTime);
             transform.Rotate(0, horizontal, 0);
         }
 
