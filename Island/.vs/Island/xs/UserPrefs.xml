@@ -1,21 +1,16 @@
 ﻿<Properties StartupConfiguration="{0FB48730-735B-7151-022B-867DB8DC6701}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Player_controller.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Coin_Behavior.cs">
     <Files>
-      <File FileName="Assets/Scripts/Player_script.cs" Line="12" Column="33" />
-      <File FileName="Assets/Scripts/Player_controller.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Player_script.cs" Line="31" Column="1" />
+      <File FileName="Assets/Scripts/Coin_Behavior.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Island" expanded="True">
             <Node name="Assets" expanded="True">
-              <Node name="Cat-Asset" expanded="True">
-                <Node name="Free_cat" expanded="True">
-                  <Node name="Animations" expanded="True" />
-                </Node>
-              </Node>
               <Node name="Scripts" expanded="True">
-                <Node name="Player_controller.cs" selected="True" />
+                <Node name="Coin_Behavior.cs" selected="True" />
               </Node>
             </Node>
           </Node>
@@ -91,7 +86,7 @@
     <String>com.unity.cinemachine.editor.csproj</String>
   </DisabledProjects>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="8e59ad04-dcf5-407a-9c11-e25b7cc44fd2" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="9df3d239-cb36-4a10-8737-589c1e2ade8f" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

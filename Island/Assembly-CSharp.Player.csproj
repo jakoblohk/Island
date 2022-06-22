@@ -56,15 +56,14 @@
     <Analyzer Include="/Applications/Visual Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.Unity/Analyzers/Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Assets/LowPolyWater_Pack/Scripts/LowPolyWater.cs" />
+    <Compile Include="Assets/External_Assets/LowPolyWater_Pack/Scripts/LowPolyWater.cs" />
     <Compile Include="Assets/Scripts/Coin_Behavior.cs" />
     <Compile Include="Assets/Scripts/Player_script.cs" />
-    <Compile Include="Assets/Scripts/Player_controller.cs" />
   </ItemGroup>
   <ItemGroup>
-    <None Include="Assets/Cat-Asset/Free_cat/Animations/low_poly_cat_animation_list.txt" />
-    <None Include="Assets/LowPolyWater_Pack/Shaders/WaterShaded.shader" />
-    <None Include="Assets/LowPolyWater_Pack/LowPoly Island/Credits.txt" />
+    <None Include="Assets/External_Assets/Cat-Asset/Free_cat/Animations/low_poly_cat_animation_list.txt" />
+    <None Include="Assets/External_Assets/LowPolyWater_Pack/Shaders/WaterShaded.shader" />
+    <None Include="Assets/External_Assets/LowPolyWater_Pack/LowPoly Island/Credits.txt" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="UnityEngine">
