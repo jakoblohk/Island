@@ -17,10 +17,18 @@ public class Player_script : MonoBehaviour
     [SerializeField]
     private float _jumpingSpeed = 1f;
 
-    private float _nextJumpTime;
+    // time delay while jumping
+    private float _nextJumpTime = 0f;
     private float _coolDownTime = 1f;
 
     private int _coins;
+
+    [SerializeField]
+    private GameObject _bulletPrefab;
+
+    // cool down for bullet firing
+    private float _firingRate = 0f;
+    private float _fireCoolDownTime = 1f;
 
     // animation for walking
     //private Animator animator;
@@ -38,6 +46,13 @@ public class Player_script : MonoBehaviour
     void Update() {
 
         PlayerMovement();
+
+        // Bullet spwanning
+        if (Input.GetKeyDown(KeyCode.E) && _firingRate < Time.time)
+        {
+            Instantiate(_bulletPrefab, transform.position + new Vector3(0f, 0.7f, 0f), Quaternion.identity);
+            _firingRate = Time.time + _fireCoolDownTime;
+        }
 
     }
 
@@ -84,7 +99,7 @@ public class Player_script : MonoBehaviour
         // TELEPORT - if player is falling teleport him back to a certain position
         if (transform.position.y < -10)
         {
-            transform.position = new Vector3(0f, 2f, 0f);
+            transform.position = new Vector3(-4.876f, 0.512f, -0.959f);
         }
 
         // create movementDirection to check if player isMoving

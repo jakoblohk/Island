@@ -56,10 +56,11 @@
     <Analyzer Include="/Applications/Visual Studio.app/Contents/Resources/lib/monodevelop/AddIns/MonoDevelop.Unity/Analyzers/Microsoft.Unity.Analyzers.dll" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Assets/Scripts/Scene_change.cs" />
+    <Compile Include="Assets/Scripts/Bullet_script.cs" />
     <Compile Include="Assets/External_Assets/LowPolyWater_Pack/Scripts/LowPolyWater.cs" />
     <Compile Include="Assets/Scripts/Coin_Behavior.cs" />
     <Compile Include="Assets/Scripts/Player_script.cs" />
-    <Compile Include="Assets/Scripts/Scene_change.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/External_Assets/Cat-Asset/Free_cat/Animations/low_poly_cat_animation_list.txt" />
