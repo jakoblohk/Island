@@ -15,10 +15,11 @@ public class Player_script : MonoBehaviour
     private Rigidbody RB;
 
     [SerializeField]
-    private float _jumpingSpeed = 4f;
+    private float _jumpingSpeed = 1f;
 
     private float _nextJumpTime;
     private float _coolDownTime = 1f;
+
     private int _coins;
 
     // animation for walking
@@ -27,7 +28,9 @@ public class Player_script : MonoBehaviour
 
     void Start() {
 
-        //transform.position = new Vector3(-18f, 1f, -12f);
+        // sets first position
+        transform.position = new Vector3(-4.876f, 0.512f, -0.959f);
+        
         //animator = GetComponent<Animator>();
     }
 
@@ -70,7 +73,7 @@ public class Player_script : MonoBehaviour
         }
         
 
-        // JUMPING
+        // jumping when space is pressed with a certain time delay berween each jump
         if (Input.GetKeyDown("space") && _nextJumpTime < Time.time)
         {
             Debug.Log("jump");
