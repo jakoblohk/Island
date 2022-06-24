@@ -14,6 +14,7 @@ public class Energy_refill : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _player.energy += 20f;
+            Destroy(this.gameObject);
         }
 
         if (_player.energy > 100) {

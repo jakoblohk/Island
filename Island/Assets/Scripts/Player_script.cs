@@ -10,6 +10,9 @@ public class Player_script : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI energyText;
 
+    [SerializeField]
+    private TextMeshProUGUI coinText;
+
     // Energylevel starts at  100%
     public float energy = 100f;
 
@@ -75,6 +78,8 @@ public class Player_script : MonoBehaviour
        
         // Text 
         energyText.SetText("Energy: " + Math.Round(energy) + "%");
+        
+
 
     }
 
