@@ -62,6 +62,10 @@
     <Compile Include="Assets/Scripts/Coin_Behavior.cs" />
     <Compile Include="Assets/Scripts/Player_script.cs" />
     <Compile Include="Assets/Scripts/Energy_refill.cs" />
+    <Compile Include="Assets/Scripts/NewBehaviourScript.cs" />
+    <Compile Include="Assets/Scripts/Chicken_script.cs" />
+    <Compile Include="Assets/Scripts/EnemyL2_script.cs" />
+    <Compile Include="Assets/Scripts/MainMenu.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Assets/TextMesh Pro/Shaders/TMPro.cginc" />

@@ -13,6 +13,11 @@ public class Energy_refill : MonoBehaviour
     {
         if (other.CompareTag("Player"))
         {
+            _player.energy += 20f;
+        }
+
+        if (_player.energy > 100) {
+
             _player.energy = 100f;
         }
     }

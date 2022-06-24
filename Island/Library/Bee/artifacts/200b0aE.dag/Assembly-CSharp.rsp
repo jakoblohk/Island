@@ -354,8 +354,12 @@
 -r:"Library/Bee/artifacts/200b0aE.dag/UnityEngine.UI.ref.dll"
 "Assets/External_Assets/LowPolyWater_Pack/Scripts/LowPolyWater.cs"
 "Assets/Scripts/Bullet_script.cs"
+"Assets/Scripts/Chicken_script.cs"
 "Assets/Scripts/Coin_Behavior.cs"
+"Assets/Scripts/EnemyL2_script.cs"
 "Assets/Scripts/Energy_refill.cs"
+"Assets/Scripts/MainMenu.cs"
+"Assets/Scripts/NewBehaviourScript.cs"
 "Assets/Scripts/Player_script.cs"
 "Assets/Scripts/Scene_change.cs"
 -langversion:9.0
