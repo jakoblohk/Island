@@ -1,9 +1,20 @@
 using System.Collections;
 using System.Collections.Generic;
 using UnityEngine;
+using TMPro;
+using System;
 
 public class Player_script : MonoBehaviour
 {
+    // text field for Energy level
+    [SerializeField]
+    private TextMeshProUGUI energyText;
+
+    // Energylevel starts at  100%
+    public float energy = 100f;
+
+    // how much energy per time unit is lost
+    private float _energyDecreaseTimeOffset = 0.5f;
 
     [SerializeField]
     public float _moveSpeed = 2f;
@@ -28,7 +39,7 @@ public class Player_script : MonoBehaviour
 
     // cool down for bullet firing
     private float _firingRate = 0f;
-    private float _fireCoolDownTime = 1f;
+    private float _fireCoolDownTime = 0.5f;
 
     // animation for walking
     //private Animator animator;
@@ -47,21 +58,34 @@ public class Player_script : MonoBehaviour
 
         PlayerMovement();
 
-        // Bullet spwanning
-        if (Input.GetKeyDown(KeyCode.E) && _firingRate < Time.time)
+        Spawning();
+
+
+        // Energy level 
+        if (energy > 0)
         {
-            Instantiate(_bulletPrefab, transform.position + new Vector3(0f, 0.7f, 0f), Quaternion.identity);
-            _firingRate = Time.time + _fireCoolDownTime;
+            energy -= _energyDecreaseTimeOffset * Time.deltaTime;
         }
+        else
+        {
+            energy = 0;
+            // hier game over einfügen ...
+        }
+
+       
+        // Text 
+        energyText.SetText("Energy: " + Math.Round(energy) + "%");
 
     }
 
-    // additional methods
+    // additional methods ----------------------------------------------------
     // Coin counter
     public void Coins()
     {
         _coins++;
     }
+
+    //  player movement 
     void PlayerMovement()
     {
         // horizontal player movement: rotates the player on the y-axis
@@ -113,6 +137,16 @@ public class Player_script : MonoBehaviour
             Debug.Log("not moving");
             animator.SetBool("isMoving", false);
         }*/
+    }
+
+    // // Bullet spwanning
+    public void Spawning()
+    {
+        if (Input.GetKeyDown(KeyCode.E) && _firingRate < Time.time)
+        {
+            Instantiate(_bulletPrefab, transform.position + new Vector3(0f, 0.7f, 0f), Quaternion.identity);
+            _firingRate = Time.time + _fireCoolDownTime;
+        }
     }
 
 }

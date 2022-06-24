@@ -355,6 +355,7 @@
 "Assets/External_Assets/LowPolyWater_Pack/Scripts/LowPolyWater.cs"
 "Assets/Scripts/Bullet_script.cs"
 "Assets/Scripts/Coin_Behavior.cs"
+"Assets/Scripts/Energy_refill.cs"
 "Assets/Scripts/Player_script.cs"
 "Assets/Scripts/Scene_change.cs"
 -langversion:9.0

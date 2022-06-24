@@ -1,10 +1,11 @@
 ﻿<Properties StartupConfiguration="{0FB48730-735B-7151-022B-867DB8DC6701}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Bullet_script.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Energy_refill.cs">
     <Files>
-      <File FileName="Assets/Scripts/Player_script.cs" Line="50" Column="1" />
+      <File FileName="Assets/Scripts/Player_script.cs" Line="75" Column="8" />
       <File FileName="Assets/Scripts/Coin_Behavior.cs" Line="1" Column="1" />
-      <File FileName="Assets/Scripts/Scene_change.cs" Line="13" Column="39" />
+      <File FileName="Assets/Scripts/Scene_change.cs" Line="8" Column="5" />
       <File FileName="Assets/Scripts/Bullet_script.cs" Line="22" Column="63" />
+      <File FileName="Assets/Scripts/Energy_refill.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
@@ -12,7 +13,7 @@
           <Node name="Island" expanded="True">
             <Node name="Assets" expanded="True">
               <Node name="Scripts" expanded="True">
-                <Node name="Bullet_script.cs" selected="True" />
+                <Node name="Energy_refill.cs" selected="True" />
               </Node>
             </Node>
           </Node>
@@ -88,7 +89,7 @@
     <String>com.unity.cinemachine.editor.csproj</String>
   </DisabledProjects>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="9df3d239-cb36-4a10-8737-589c1e2ade8f" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="9133c4f3-d43e-4917-add0-19eba762bc7f" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>
