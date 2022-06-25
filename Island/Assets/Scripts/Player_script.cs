@@ -1,32 +1,42 @@
 using System.Collections;
 using System.Collections.Generic;
+using UnityEngine.SceneManagement;
 using UnityEngine;
 using TMPro;
 using System;
 
 public class Player_script : MonoBehaviour
 {
-    // text field for Energy level
+    // TEXT fields for UI
+    // Energylevel
     [SerializeField]
     private TextMeshProUGUI energyText;
-
+    // number of coins
     [SerializeField]
     private TextMeshProUGUI coinText;
+    // hp bar
+    [SerializeField]
+    private TextMeshProUGUI healthText;
+    // context sensitive player information
+    [SerializeField]
+    private TextMeshProUGUI contextText;
+    // string variable to change according to context
+    public string context;
 
-    // Energylevel starts at  100%
+    // VARIABLES for coins, health, energy
+    private int _health = 100;
     public float energy = 100f;
-
+    public int coins = 0;
     // how much energy per time unit is lost
     private float _energyDecreaseTimeOffset = 0.5f;
 
+    // PLAYER MOVEMENT
+    // variables for player movement
     [SerializeField]
     public float _moveSpeed = 2f;
 
     [SerializeField]
-    public float _turnSpeed = 15f;
-
-    [SerializeField]
-    private Rigidbody RB;
+    public float _turnSpeed = 50f;
 
     [SerializeField]
     private float _jumpingSpeed = 1f;
@@ -35,65 +45,147 @@ public class Player_script : MonoBehaviour
     private float _nextJumpTime = 0f;
     private float _coolDownTime = 1f;
 
-    private int _coins;
-
+    // rigid body of the player
+    [SerializeField]
+    private Rigidbody RB;
+    
+    // FURBALL aka BULLET
+    // spawnpoint for Furballs
+    public Transform bulletSpawnPoint;
     [SerializeField]
     private GameObject _bulletPrefab;
+    // speed, how  fast the furballs fly 
+    private float _bulletSpeed = 5f;
 
-    // cool down for bullet firing
+    // cool down for furball firing
     private float _firingRate = 0f;
     private float _fireCoolDownTime = 0.5f;
 
+    private float _timer = 0;
+
     // animation for walking
-    //private Animator animator;
+    private Animator animator;
 
+    // store scene to check where player is 
+    Scene scene;
 
-    void Start() {
+    // Instantiate Player
+    void Start()
+    {
+        // set scene
+        scene = SceneManager.GetActiveScene();
 
+        // check for which level to give out appropriate information
+        if (scene.name == "Level-1")
+        {
+            context = "Hello SUPER CAT! \nToday your mission is to eat vegan burgers, dodge chicken and collect coins!";
+        } else if (scene.name == "Level-2")
+        {
+            context = "Glad you made it! Now climb as far as you can! \n HINT: If you don't reach the coins, use 'E' to shoot them with a FURBALL";
+        }
         // sets first position
         transform.position = new Vector3(-4.876f, 0.512f, -0.959f);
-        
-        //animator = GetComponent<Animator>();
+
+        // instantiate animator
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {   
+        // increase timer for UI decay
+        _timer++;
 
+        // call methods
+        Death();
+        UserInterface();
         PlayerMovement();
-
+        PlayerAnimation();
         Spawning();
-
-
-        // Energy level 
-        if (energy > 0)
-        {
-            energy -= _energyDecreaseTimeOffset * Time.deltaTime;
-        }
-        else
-        {
-            energy = 0;
-            // hier game over einfügen ...
-        }
-
-       
-        // Text 
-        energyText.SetText("Energy: " + Math.Round(energy) + "%");
-        
-
 
     }
 
     // additional methods ----------------------------------------------------
-    // Coin counter
-    public void Coins()
-    {
-        _coins++;
+
+
+    /* 
+     * UserInterface()
+     * Creates and updates the UserInterface (UI) to show how much energy is left,
+     * how many coins have been collected and how many health points are left. 
+     */
+    public void UserInterface()
+    {   
+        // after 600 frames empty context
+        if (_timer == 600)
+        {
+            context = "";
+        }
+        // Set Context Information
+        contextText.SetText(context);
+
+        // Energy level decrease over time
+        if (energy > 0)
+        {
+            energy -= _energyDecreaseTimeOffset * Time.deltaTime;
+        }
+        // Set energy text
+        energyText.SetText("Energy: " + Math.Round(energy) + "%");
+
+        // Set Health Bar text
+        healthText.SetText("HP: " + _health);
+
+        // Set Coins text, for each level respectively
+        if (scene.name == "Level-1")
+        {
+            coinText.SetText("Coins: " + coins + "/15");
+        }
+        else
+        {
+            coinText.SetText("Coins: " + coins + "/20");
+        }        
     }
 
-    //  player movement 
+    /* 
+     * Death()
+     * If the player runs out of energy or HP the game is over.
+     */
+    void Death()
+    {
+        if (_health <= 0 || energy <= 0)
+        {
+            Destroy(this.gameObject);
+            // Tell User they died
+            context = "GAME OVER";
+        }
+    }
+
+    /*
+     * Coins()
+     * Counts the collected coins, and if called returns current number of coins.
+     */
+    public int Coins()
+    {
+        coins++;
+        return coins;
+    }
+
+    /*
+     * Damage()
+     * If the player takes damage from chicken, decrease HP by 7.
+     */
+    public void Damage()
+    {
+        _health = _health - 7;
+    }
+
+    /*
+     * PlayerMovement()
+     * The player can move forward and backwards, rotate to change direction (w,a,s,d, or arrow keys)
+     * and jump with 'spacebar'. If the player is falling, e.g. level 2, return to start position and substract 11 hp.
+     */
     void PlayerMovement()
     {
-        // horizontal player movement: rotates the player on the y-axis
+        //  ROTATION - horizontal player movement: rotates the player on the y-axis
         float horizontal = Input.GetAxis("Horizontal");
 
         if (horizontal > 0)
@@ -105,35 +197,60 @@ public class Player_script : MonoBehaviour
             transform.Rotate(0, horizontal, 0);
         }
 
-        // vertical player movement: moves player forward or back
+        // MOVEMENT - vertical player movement: moves player forward or back
         float vertical = Input.GetAxis("Vertical");
 
         if (vertical > 0)
-        {   
+        {
             transform.Translate(Vector3.forward * _moveSpeed * Time.deltaTime);
-        } else if (vertical < 0)
+        }
+        else if (vertical < 0)
         {
             transform.Translate(Vector3.back * _moveSpeed * Time.deltaTime);
         }
-        
 
-        // jumping when space is pressed with a certain time delay berween each jump
+        // JUMPING - when space is pressed with a certain time delay berween each jump
         if (Input.GetKeyDown("space") && _nextJumpTime < Time.time)
         {
-            Debug.Log("jump");
             RB.velocity += new Vector3(0f, _jumpingSpeed, 0f);
             _nextJumpTime = Time.time + _coolDownTime;
         }
 
-        // TELEPORT - if player is falling teleport him back to a certain position
+        // TELEPORT - if player is falling teleport them back to a certain position and decrease HP by 11
         if (transform.position.y < -10)
         {
             transform.position = new Vector3(-4.876f, 0.512f, -0.959f);
-        }
+            _health = _health - 11;
 
-        // create movementDirection to check if player isMoving
-        //Vector3 movementDirection = new Vector3(horizontal, 0, vertical);
-        /*if (movementDirection != Vector3.zero)
+        }
+    }
+
+    /*
+     * Spawning()
+     * Spawns a Furball that shoots (pressing E) in the direction of where the cat is facing. It has a limited firing rate.
+     * 
+     */
+    public void Spawning()
+    {
+        // if E is pressed and firing rate is over, shoot another bullet
+        if (Input.GetKeyDown(KeyCode.E) && _firingRate < Time.time)
+        {
+            var bullet = Instantiate(_bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+            bullet.GetComponent<Rigidbody>().velocity = bulletSpawnPoint.forward * _bulletSpeed;
+
+            _firingRate = Time.time + _fireCoolDownTime;
+        }
+    }
+
+    /*
+     * PlayerAnimation()
+     * Sets a boolean for isMoving or isMovingBackwards to either true or false, 
+     * determined by which key is pressed, as well as if the player is standing still
+     */
+    void PlayerAnimation()
+    {
+        // 
+        if (Input.GetKey("up") || Input.GetKey("w"))
         {
             animator.SetBool("isMoving", true);
         }
@@ -141,16 +258,16 @@ public class Player_script : MonoBehaviour
         {
             Debug.Log("not moving");
             animator.SetBool("isMoving", false);
-        }*/
-    }
+        }
 
-    // // Bullet spwanning
-    public void Spawning()
-    {
-        if (Input.GetKeyDown(KeyCode.E) && _firingRate < Time.time)
+        if (Input.GetKey("down") || Input.GetKey("s"))
         {
-            Instantiate(_bulletPrefab, transform.position + new Vector3(0f, 0.7f, 0f), Quaternion.identity);
-            _firingRate = Time.time + _fireCoolDownTime;
+            animator.SetBool("isMovingBackwards", true);
+        }
+        else
+        {
+            Debug.Log("not moving");
+            animator.SetBool("isMovingBackwards", false);
         }
     }
 
