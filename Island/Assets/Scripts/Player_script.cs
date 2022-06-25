@@ -13,6 +13,8 @@ public class Player_script : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI coinText;
 
+    // DO THE SAME FOR HP
+
     // Energylevel starts at  100%
     public float energy = 100f;
 
@@ -35,7 +37,8 @@ public class Player_script : MonoBehaviour
     private float _nextJumpTime = 0f;
     private float _coolDownTime = 1f;
 
-    private int _coins;
+    private int _coins = 0;
+    private int _health = 100;
 
     [SerializeField]
     private GameObject _bulletPrefab;
@@ -48,46 +51,63 @@ public class Player_script : MonoBehaviour
     //private Animator animator;
 
 
-    void Start() {
+    void Start()
+    {
 
         // sets first position
         transform.position = new Vector3(-4.876f, 0.512f, -0.959f);
-        
+
         //animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
-    void Update() {
+    void Update()
+    {
 
+        UserInterface();
+        Death();
         PlayerMovement();
-
         Spawning();
-
-
-        // Energy level 
-        if (energy > 0)
-        {
-            energy -= _energyDecreaseTimeOffset * Time.deltaTime;
-        }
-        else
-        {
-            energy = 0;
-            // hier game over einfügen ...
-        }
-
-       
-        // Text 
-        energyText.SetText("Energy: " + Math.Round(energy) + "%");
-        
-
 
     }
 
     // additional methods ----------------------------------------------------
+
+    public void UserInterface()
+    {
+        // Energy level decrease over time
+        if (energy > 0)
+        {
+            energy -= _energyDecreaseTimeOffset * Time.deltaTime;
+        }
+        energyText.SetText("Energy: " + Math.Round(energy) + "%");
+
+        // Health Bar
+        Debug.Log(_health);
+        // Coins
+        Debug.Log(_coins);
+        // Information
+
+    }
+    // Death condition, either no hp or no energy
+    void Death()
+    {
+        if (_health <= 0 || energy <= 0)
+        {
+            Destroy(this.gameObject);
+            // Tell User he died
+            //...
+        }
+    }
     // Coin counter
     public void Coins()
     {
         _coins++;
+    }
+
+    public void Damage()
+    {
+        _health--;
     }
 
     //  player movement 
@@ -109,13 +129,14 @@ public class Player_script : MonoBehaviour
         float vertical = Input.GetAxis("Vertical");
 
         if (vertical > 0)
-        {   
+        {
             transform.Translate(Vector3.forward * _moveSpeed * Time.deltaTime);
-        } else if (vertical < 0)
+        }
+        else if (vertical < 0)
         {
             transform.Translate(Vector3.back * _moveSpeed * Time.deltaTime);
         }
-        
+
 
         // jumping when space is pressed with a certain time delay berween each jump
         if (Input.GetKeyDown("space") && _nextJumpTime < Time.time)
@@ -144,7 +165,7 @@ public class Player_script : MonoBehaviour
         }*/
     }
 
-    // // Bullet spwanning
+    // // Bullet spwaning
     public void Spawning()
     {
         if (Input.GetKeyDown(KeyCode.E) && _firingRate < Time.time)

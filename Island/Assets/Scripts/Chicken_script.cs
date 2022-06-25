@@ -15,9 +15,15 @@ public class Chicken_script : MonoBehaviour
     [SerializeField]
     private Rigidbody RB_Chicken;
 
+    [SerializeField]
+    private Player_script _player;
+
+    [SerializeField]
+    private Bullet_script _bullet;
+
     private void Start()
     {
-      
+
     }
 
     private void Update()
@@ -32,13 +38,30 @@ public class Chicken_script : MonoBehaviour
         }
         if (_isRotatingLeft == true)
         {
-            transform.Rotate(transform.up * Time.deltaTime * - _rotationSpeedChicken);
+            transform.Rotate(transform.up * Time.deltaTime * -_rotationSpeedChicken);
         }
         if (_isWalking == true)
         {
             RB_Chicken.transform.position += transform.forward * _moveSpeedChicken;
         }
     }
+
+    private void OnTriggerEnter(Collider other)
+    {
+
+        if (other.CompareTag("Player"))
+        {
+            _player.Damage();
+            Debug.Log("in chicken: call player.damage");
+        }
+        /*
+        if (other.CompareTag("Bullet"))
+        {
+            Destroy(this.gameObject);
+            Destroy(other.gameObject);
+        }*/
+    }
+
     IEnumerator Wander()
     {
         int rottime = Random.Range(1, 3);
