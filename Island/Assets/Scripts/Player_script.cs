@@ -55,7 +55,7 @@ public class Player_script : MonoBehaviour
     private float _timer = 0;
 
     // animation for walking
-    //private Animator animator;
+    private Animator animator;
 
 
     void Start()
@@ -65,7 +65,7 @@ public class Player_script : MonoBehaviour
         // sets first position
         transform.position = new Vector3(-4.876f, 0.512f, -0.959f);
 
-        //animator = GetComponent<Animator>();
+        animator = GetComponent<Animator>();
     }
 
     // Update is called once per frame
@@ -77,6 +77,25 @@ public class Player_script : MonoBehaviour
         PlayerMovement();
         Spawning();
 
+        if (Input.GetKey("up") || Input.GetKey("w"))
+        {
+            animator.SetBool("isMoving", true);
+        }
+        else
+        {
+            Debug.Log("not moving");
+            animator.SetBool("isMoving", false);
+        }
+
+        if (Input.GetKey("down") || Input.GetKey("s"))
+        {
+            animator.SetBool("isMovingBackwards", true);
+        }
+        else
+        {
+            Debug.Log("not moving");
+            animator.SetBool("isMovingBackwards", false);
+        }
     }
 
     // additional methods ----------------------------------------------------

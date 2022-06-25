@@ -29,7 +29,7 @@ public class EnemyL2_script : MonoBehaviour
         // TELEPORT BACK TO START
         if (transform.position.y > 30)
         {
-            transform.position = new Vector3(Random.Range(-20f, 20f), -10f, Random.Range(-20f, 20f));
+            transform.position = new Vector3(Random.Range(-20f, 20f), -15f, Random.Range(-20f, 20f));
         }
     }
 
