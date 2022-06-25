@@ -3,30 +3,31 @@ using System.Collections.Generic;
 using UnityEngine;
 
 public class SpawnManager : MonoBehaviour
-{
+{   
+    // instantiate balloonPrefab as gameObject
     [SerializeField]
     private GameObject _balloonPrefab;
 
+    // variables for time delay and lifetime
     private float _delay = 3f;
     private bool _alive = true;
 
-    // Start is called before the first frame update
+    // Start Coroutine
     void Start()
     {
         StartCoroutine(SpawnSystem());    
     }
 
-    // Update is called once per frame
-    void Update()
-    {
-        
-    }
-
+    // when player dies set _alive to false (and consequently stop spawning)
     public void onPlayerDeath()
     {
         _alive = false;
     }
 
+    /*
+     * SpanSystem()
+     * while alive is true, instantiate balloons that are spawned randomly below the player.
+     */
     IEnumerator SpawnSystem()
     {
         while (_alive)

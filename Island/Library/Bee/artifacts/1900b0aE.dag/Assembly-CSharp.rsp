@@ -353,6 +353,7 @@
 -r:"Library/Bee/artifacts/1900b0aE.dag/Unity.VSCode.Editor.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEditor.UI.ref.dll"
 -r:"Library/Bee/artifacts/1900b0aE.dag/UnityEngine.UI.ref.dll"
+"Assets/External_Assets/Gem-asset/Gems Ultimate Pack/Scripts/AnimationScript.cs"
 "Assets/External_Assets/LowPolyWater_Pack/Scripts/LowPolyWater.cs"
 "Assets/Scripts/Bullet_script.cs"
 "Assets/Scripts/Chicken_script.cs"
@@ -362,6 +363,7 @@
 "Assets/Scripts/MainMenu.cs"
 "Assets/Scripts/Player_script.cs"
 "Assets/Scripts/Scene_change.cs"
+"Assets/Scripts/Scene_change_2.cs"
 "Assets/Scripts/SpawnManager.cs"
 -langversion:9.0
 

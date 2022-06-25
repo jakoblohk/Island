@@ -13,10 +13,10 @@ public class Scene_change : MonoBehaviour
     {
         // if in goalstate and meet coin condition, advance to level 2 and reset coin counter
         if (other.CompareTag("Player") && (_player.coins == 15))
-        {
+        {   
+            // change level and set coins to 0
             SceneManager.LoadScene(1);
             _player.coins = 0;
-            _player.context = "";
         }
     }
 }
