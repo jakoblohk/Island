@@ -6,18 +6,25 @@ using System;
 
 public class Player_script : MonoBehaviour
 {
-    // text field for Energy level
+    // TEXT fields for UI
     [SerializeField]
     private TextMeshProUGUI energyText;
 
     [SerializeField]
     private TextMeshProUGUI coinText;
 
-    // DO THE SAME FOR HP
+    [SerializeField]
+    private TextMeshProUGUI healthText;
 
-    // Energylevel starts at  100%
+    [SerializeField]
+    private TextMeshProUGUI contextText;
+
+    private string _context;
+
+    // VARIABLES for coins, health, energy ...
+    private int _health = 100;
     public float energy = 100f;
-
+    public int coins = 0;
     // how much energy per time unit is lost
     private float _energyDecreaseTimeOffset = 0.5f;
 
@@ -25,7 +32,7 @@ public class Player_script : MonoBehaviour
     public float _moveSpeed = 2f;
 
     [SerializeField]
-    public float _turnSpeed = 15f;
+    public float _turnSpeed = 25f;
 
     [SerializeField]
     private Rigidbody RB;
@@ -37,8 +44,6 @@ public class Player_script : MonoBehaviour
     private float _nextJumpTime = 0f;
     private float _coolDownTime = 1f;
 
-    private int _coins = 0;
-    private int _health = 100;
 
     [SerializeField]
     private GameObject _bulletPrefab;
@@ -47,13 +52,16 @@ public class Player_script : MonoBehaviour
     private float _firingRate = 0f;
     private float _fireCoolDownTime = 0.5f;
 
+    private float _timer = 0;
+
     // animation for walking
     //private Animator animator;
 
 
     void Start()
     {
-
+        _context = "Hello SUPER CAT! \nToday your mission is to eat vegan burgers, dodge chicken and collect coins!";
+  
         // sets first position
         transform.position = new Vector3(-4.876f, 0.512f, -0.959f);
 
@@ -63,9 +71,9 @@ public class Player_script : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-
-        UserInterface();
+        _timer++;
         Death();
+        UserInterface();
         PlayerMovement();
         Spawning();
 
@@ -75,19 +83,24 @@ public class Player_script : MonoBehaviour
 
     public void UserInterface()
     {
-        // Energy level decrease over time
-        if (energy > 0)
+        if (_timer == 600)
+        {
+            _context = "";
+        }
+            // Energy level decrease over time
+            if (energy > 0)
         {
             energy -= _energyDecreaseTimeOffset * Time.deltaTime;
         }
         energyText.SetText("Energy: " + Math.Round(energy) + "%");
 
         // Health Bar
-        Debug.Log(_health);
-        // Coins
-        Debug.Log(_coins);
+        healthText.SetText("HP: " + _health);
+        // Coins    
+        coinText.SetText("Coins: " + coins + "/15");
         // Information
-
+        contextText.SetText(_context);
+        
     }
     // Death condition, either no hp or no energy
     void Death()
@@ -96,18 +109,20 @@ public class Player_script : MonoBehaviour
         {
             Destroy(this.gameObject);
             // Tell User he died
-            //...
+            _context = "Oh no, you failed my expectations. What a disappointment. Your parents warned me";
         }
     }
     // Coin counter
-    public void Coins()
+    public int Coins()
     {
-        _coins++;
+        coins++;
+
+        return coins;
     }
 
     public void Damage()
     {
-        _health--;
+        _health = _health - 7;
     }
 
     //  player movement 

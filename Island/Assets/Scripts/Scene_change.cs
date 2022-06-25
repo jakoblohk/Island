@@ -5,12 +5,17 @@ using UnityEngine.SceneManagement;
 
 public class Scene_change : MonoBehaviour
 {
-    // level switisch to Level-2
+    [SerializeField]
+    private Player_script _player;
+
+    // level switsch to Level-2
     private void OnTriggerEnter(Collider other)
     {
-        if (other.CompareTag("Player"))
+        // if in goalstate and meet coin condition, advance to level 2 and reset coin counter
+        if (other.CompareTag("Player") && (_player.coins == 15))
         {
             SceneManager.LoadScene(1);
+            _player.coins = 0;
         }
     }
 }
