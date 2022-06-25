@@ -19,7 +19,7 @@ public class Player_script : MonoBehaviour
     [SerializeField]
     private TextMeshProUGUI contextText;
 
-    private string _context;
+    public string context;
 
     // VARIABLES for coins, health, energy ...
     private int _health = 100;
@@ -45,8 +45,12 @@ public class Player_script : MonoBehaviour
     private float _coolDownTime = 1f;
 
 
+    public Transform bulletSpawnPoint;
+
     [SerializeField]
     private GameObject _bulletPrefab;
+    // speed, how  fast the bullets fly 
+    private float _bulletSpeed = 5f;
 
     // cool down for bullet firing
     private float _firingRate = 0f;
@@ -60,7 +64,7 @@ public class Player_script : MonoBehaviour
 
     void Start()
     {
-        _context = "Hello SUPER CAT! \nToday your mission is to eat vegan burgers, dodge chicken and collect coins!";
+        context = "Hello SUPER CAT! \nToday your mission is to eat vegan burgers, dodge chicken and collect coins!";
   
         // sets first position
         transform.position = new Vector3(-4.876f, 0.512f, -0.959f);
@@ -104,7 +108,7 @@ public class Player_script : MonoBehaviour
     {
         if (_timer == 600)
         {
-            _context = "";
+            context = "";
         }
             // Energy level decrease over time
             if (energy > 0)
@@ -118,7 +122,7 @@ public class Player_script : MonoBehaviour
         // Coins    
         coinText.SetText("Coins: " + coins + "/15");
         // Information
-        contextText.SetText(_context);
+        contextText.SetText(context);
         
     }
     // Death condition, either no hp or no energy
@@ -128,7 +132,7 @@ public class Player_script : MonoBehaviour
         {
             Destroy(this.gameObject);
             // Tell User he died
-            _context = "Oh no, you failed my expectations. What a disappointment. Your parents warned me";
+            context = "Oh no, you failed my expectations. What a disappointment. Your parents warned me";
         }
     }
     // Coin counter
@@ -185,26 +189,16 @@ public class Player_script : MonoBehaviour
         {
             transform.position = new Vector3(-4.876f, 0.512f, -0.959f);
         }
-
-        // create movementDirection to check if player isMoving
-        //Vector3 movementDirection = new Vector3(horizontal, 0, vertical);
-        /*if (movementDirection != Vector3.zero)
-        {
-            animator.SetBool("isMoving", true);
-        }
-        else
-        {
-            Debug.Log("not moving");
-            animator.SetBool("isMoving", false);
-        }*/
     }
 
-    // // Bullet spwaning
+    // Bullet spwaning
     public void Spawning()
     {
         if (Input.GetKeyDown(KeyCode.E) && _firingRate < Time.time)
         {
-            Instantiate(_bulletPrefab, transform.position + new Vector3(0f, 0.7f, 0f), Quaternion.identity);
+            var bullet = Instantiate(_bulletPrefab, bulletSpawnPoint.position, bulletSpawnPoint.rotation);
+            bullet.GetComponent<Rigidbody>().velocity = bulletSpawnPoint.forward * _bulletSpeed;
+
             _firingRate = Time.time + _fireCoolDownTime;
         }
     }

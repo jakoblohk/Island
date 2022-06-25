@@ -52,7 +52,6 @@ public class Chicken_script : MonoBehaviour
         if (other.CompareTag("Player"))
         {
             _player.Damage();
-            Debug.Log("in chicken: call player.damage");
         }
         /*
         if (other.CompareTag("Bullet"))

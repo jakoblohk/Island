@@ -16,6 +16,7 @@ public class Scene_change : MonoBehaviour
         {
             SceneManager.LoadScene(1);
             _player.coins = 0;
+            _player.context = "";
         }
     }
 }

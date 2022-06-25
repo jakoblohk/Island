@@ -8,9 +8,6 @@ public class EnemyL2_script : MonoBehaviour
     private Player_script _player;
 
     [SerializeField]
-    private Bullet_script _bullet;
-
-    [SerializeField]
     private float _balloonSpeed = 1.5f;
 
 
@@ -35,7 +32,7 @@ public class EnemyL2_script : MonoBehaviour
 
     private void OnTriggerEnter(Collider other)
     {
-
+        Debug.Log("Ontriggerenter");
         if (other.CompareTag("Player"))
         {
             _player.Damage();
