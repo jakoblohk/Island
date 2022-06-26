@@ -1,26 +1,26 @@
 ﻿<Properties StartupConfiguration="{0FB48730-735B-7151-022B-867DB8DC6701}|">
-  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/EnemyL2_script.cs">
+  <MonoDevelop.Ide.Workbench ActiveDocument="Assets/Scripts/Music_control_script.cs">
     <Files>
-      <File FileName="Assets/Scripts/Player_script.cs" Line="84" Column="1" />
-      <File FileName="Assets/Scripts/Coin_Behavior.cs" Line="10" Column="5" />
-      <File FileName="Assets/Scripts/Scene_change.cs" Line="8" Column="5" />
-      <File FileName="Assets/Scripts/Bullet_script.cs" Line="22" Column="63" />
-      <File FileName="Assets/Scripts/Energy_refill.cs" Line="21" Column="33" />
-      <File FileName="Assets/Scripts/Chicken_script.cs" Line="61" Column="31" />
-      <File FileName="Assets/Scripts/MainMenu.cs" Line="23" Column="1" />
+      <File FileName="Assets/Scripts/Player_script.cs" Line="138" Column="59" />
+      <File FileName="Assets/Scripts/Coin_Behavior.cs" />
+      <File FileName="Assets/Scripts/Scene_change.cs" Line="23" Column="1" />
+      <File FileName="Assets/Scripts/Bullet_script.cs" />
+      <File FileName="Assets/Scripts/Energy_refill.cs" />
+      <File FileName="Assets/Scripts/Chicken_script.cs" />
+      <File FileName="Assets/Scripts/MainMenu.cs" />
       <File FileName="Assets/Scripts/EnemyL2_script.cs" Line="1" Column="1" />
+      <File FileName="Assets/Scripts/Music_control_script.cs" Line="1" Column="1" />
     </Files>
     <Pads>
       <Pad Id="ProjectPad">
         <State name="__root__">
           <Node name="Island" expanded="True">
             <Node name="Assets" expanded="True">
+              <Node name="Scenes" expanded="True" />
               <Node name="Scripts" expanded="True">
-                <Node name="EnemyL2_script.cs" selected="True" />
+                <Node name="Music_control_script.cs" selected="True" />
               </Node>
-              <Node name="TextMesh Pro" expanded="True">
-                <Node name="Shaders" expanded="True" />
-              </Node>
+              <Node name="TextMesh Pro" expanded="True" />
             </Node>
           </Node>
         </State>
@@ -95,7 +95,7 @@
     <String>com.unity.cinemachine.editor.csproj</String>
   </DisabledProjects>
   <MonoDevelop.Ide.Workspace ActiveConfiguration="Debug" />
-  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="9133c4f3-d43e-4917-add0-19eba762bc7f" />
+  <MonoDevelop.Ide.ItemProperties.Assembly-CSharp PreferredExecutionTarget="db9a7aa9-5fa8-468b-86e1-b812f9a752c4" />
   <MonoDevelop.Ide.DebuggingService.Breakpoints>
     <BreakpointStore />
   </MonoDevelop.Ide.DebuggingService.Breakpoints>

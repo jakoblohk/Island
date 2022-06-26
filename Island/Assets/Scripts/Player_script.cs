@@ -36,7 +36,7 @@ public class Player_script : MonoBehaviour
     public float _moveSpeed = 2f;
 
     [SerializeField]
-    public float _turnSpeed = 50f;
+    public float _turnSpeed = 70f;
 
     [SerializeField]
     private float _jumpingSpeed = 1f;
@@ -62,6 +62,7 @@ public class Player_script : MonoBehaviour
     private float _fireCoolDownTime = 0.5f;
 
     private float _timer = 0;
+    private float _timerCoins = 0;
 
     // animation for walking
     private Animator animator;
@@ -116,12 +117,36 @@ public class Player_script : MonoBehaviour
     public void UserInterface()
     {   
         // after 600 frames empty context
-        if (_timer == 600)
+        if (_timer == 550)
         {
             context = "";
         }
         // Set Context Information
         contextText.SetText(context);
+
+        // if the player has 15 coins in Level 1 (or 20 coins in Level 2) tell them to find the red star (300 frames)
+        if (coins == 15 && scene.name == "Level-1")
+        {
+            _timerCoins++;
+            if (_timerCoins <= 300)
+            {
+                contextText.SetText("Well done, you have 15 coins! Now find the red star!");
+            } else if(_timerCoins > 300)
+            {
+                context = "";
+            }
+        } else if (coins == 20 && scene.name == "Level-2")
+        {
+            _timerCoins++;
+            if (_timerCoins <= 300)
+            {
+                contextText.SetText("Well done, you have 20 coins! Now find the red star!");
+            } else if (_timerCoins > 300)
+            {
+                context = "";
+            }
+        }
+
 
         // Energy level decrease over time
         if (energy > 0)
@@ -155,7 +180,8 @@ public class Player_script : MonoBehaviour
         {
             Destroy(this.gameObject);
             // Tell User they died
-            context = "GAME OVER";
+            // context = "GAME OVER";
+            SceneManager.LoadScene(4);
         }
     }
 

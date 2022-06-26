@@ -12,7 +12,7 @@ public class Scene_change : MonoBehaviour
     private void OnTriggerEnter(Collider other)
     {
         // if in goalstate and meet coin condition, advance to level 2 and reset coin counter
-        if (other.CompareTag("Player") && (_player.coins == 15))
+        if (other.CompareTag("Player") && (_player.coins >= 15))
         {   
             // change level and set coins to 0
             SceneManager.LoadScene(1);
